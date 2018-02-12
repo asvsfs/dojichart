@@ -5,7 +5,7 @@
 ## Install
 
 ```
-npm install dojichart
+npm install 
 ```
 
 ## Features
