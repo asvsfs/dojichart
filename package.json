@@ -5,7 +5,7 @@
   "description": "Candlestick charts using the canvas element",
   "repository": {
     "type": "git",
-    "url": "https://github.com/dojichart/dojichart"
+    "url": "https://github.com/asvsfs/dojichart"
   },
   "directories": {
     "bin": "./dist",
