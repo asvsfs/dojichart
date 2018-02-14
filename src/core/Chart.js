@@ -6,6 +6,7 @@ var TimeSeriesData = require("../timeseries/TimeSeriesData");
 var TimeGrid = require("../core/TimeGrid");
 var Crosshair = require("../crosshair/Crosshair");
 
+
 const _default_config = {
   width: "auto",
   intervalWidth: 7,
@@ -39,6 +40,7 @@ class Chart extends Type {
     this._el = el;
     this._components = [];
     this._data = undefined;
+    this.lastFinal = false;
     if(_.isNumber(this.width))
     {
       this._el.style.width = this.width + "px";
@@ -250,6 +252,67 @@ class Chart extends Type {
         comp.precompute(this._data);
       }
     }
+    if(do_draw === undefined || do_draw === true)
+    {
+      if(this.scrollToEndOnLoad === true)
+      {
+        this.scroll(0, true, false);
+      }
+      this.draw();
+    }
+  }
+
+
+  /**
+   * addData data.
+   * @param {timeseries.DataPoint[]} raw_data
+   * @param {boolean} do_draw
+   */
+  addData(raw_data, do_draw) {
+    //this._data._raw_data.splice.apply(this._data._raw_data, [2, 0].concat(raw_data));
+    //this._data._raw_data.splice(this._data._raw_data[this._data._raw_data.length-1], 0, ...raw_data);
+    this._data._raw_data = this._data._raw_data.concat([raw_data]);
+    // this._data._initTimeToIndexMap();
+    // for(var i = 0; i < this._components.length; i++)
+    // {
+    //   var comp = this._components[i];
+    //   if(comp.precompute)
+    //   {
+    //     comp.precompute(this._data);
+    //   }
+    // }
+    
+    if(do_draw === undefined || do_draw === true)
+    {
+      if(this.scrollToEndOnLoad === true)
+      {
+        this.scroll(0, true, false);
+      }
+      this.draw();
+    }
+  }
+
+
+  /**
+   * updateSingleData data.
+   * @param {timeseries.DataPoint[]} raw_data
+   * @param {boolean} do_draw
+   */
+  updateSingleData(raw_data, do_draw,) {
+    if(raw_data.isFinal || this.lastFinal) {
+      
+      if(this.lastFinal == false){
+        this.addData(raw_data.tick,do_draw);
+      }
+        
+
+      this.lastFinal = raw_data.isFinal;
+    }else{
+      this._data._raw_data[this._data._raw_data.length-1] = raw_data.tick;
+    }
+  }
+
+  redraw(do_draw){
     if(do_draw === undefined || do_draw === true)
     {
       if(this.scrollToEndOnLoad === true)
