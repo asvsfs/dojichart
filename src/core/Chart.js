@@ -12,6 +12,7 @@ const _default_config = {
   intervalWidth: 7,
   paddingRight: 40,
   offset: 0,
+  yOffset :0,
   relativeOffset: 0,
   offsetFromEnd: false,
   scrollToEndOnLoad: true,
@@ -173,6 +174,14 @@ class Chart extends Type {
    */
   getOffset() {
     return this.offset;
+  }
+
+  /**
+   * Get y offset
+   * @returns {number}
+   */
+  getYOffset() {
+    return this.yOffset;
   }
 
   /**
@@ -398,6 +407,19 @@ class Chart extends Type {
   }
 
   /**
+   * Scroll Y by specified offset.
+   * @param {number} given_offset
+   * @param {boolean} do_draw
+   */
+  scrollY(given_offset, do_draw) {
+    this._setYOffset(given_offset);
+    if(do_draw === undefined || do_draw === true)
+    {
+      this.draw();
+    }
+  }
+
+  /**
    * Set offset
    * @param {number} given_offset
    * @param {boolean} from_end
@@ -416,6 +438,15 @@ class Chart extends Type {
     {
       this.offset = given_offset;
     }
+  }
+
+  /**
+   * Set Y offset
+   * @param {number} given_offset
+   * @private
+   */
+  _setYOffset(given_offset) {
+    this.yOffset = given_offset;
   }
 
   /**

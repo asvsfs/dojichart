@@ -5,18 +5,17 @@ var Moment = require("moment");
 var Type = require("../core/Type");
 
 const GRANS = {
-  "M1": {ident:"M1", hours:1/60, mins: 1},
-  "M5": {ident:"M5", hours:1/12, mins: 5},
-  "M10": {ident:"M10", hours:1/6, mins: 10},
-  "M15": {ident:"M15", hours:0.25, mins: 15},
-  "M30": {ident:"M30", hours:0.5, mins: 30},
-  "H1": {ident:"H1", hours:1, mins: 60},
-  "H4": {ident:"H4", hours:4, mins: 60 * 4},
-  "H8": {ident:"H8", hours:8, mins: 60 * 8},
-  "D": {ident:"D", hours:24, mins: 60 * 24, days:1}, // 1 day
-  "W": {ident:"W", hours:120, mins: 60 * 24 * 5, days:5, weeks:1}, // 5 days
+  "1m": {ident:"1m", hours:1/60, mins: 1},
+  "5m": {ident:"5m", hours:1/12, mins: 5},
+  "15m": {ident:"15m", hours:0.25, mins: 15},
+  "30m": {ident:"30m", hours:0.5, mins: 30},
+  "1h": {ident:"1h", hours:1, mins: 60},
+  "3h": {ident:"3h", hours:4, mins: 60 * 3},
+  "4h": {ident:"4h", hours:4, mins: 60 * 4},
+  "8h": {ident:"8h", hours:8, mins: 60 * 8},
+  "d": {ident:"d", hours:24, mins: 60 * 24, days:1}, // 1 day
+  "w": {ident:"w", hours:120, mins: 60 * 24 * 5, days:5, weeks:1}, // 5 days
   "M": {ident:"M", hours:504, mins: 60 * 24 * 21, days:21, weeks:4, months:1}, // 21 days
-  "Q": {ident:"Q", hours:1512, mins: 60 * 24 * 63, days: 63, weeks:13, months:3}, // 63 days
   "Y": {ident:"Y", hours:6000, mins: 60 * 24 * 250, days: 250, weeks:51, months:12, years:1} // 250 days
 };
 

@@ -87,9 +87,9 @@ class TimeValuePanel extends TimePanel {
    * @param {number} offset
    * @param {indexToPixel} indexToPixel
    */
-  draw(data, count, offset, indexToPixel) {
+  draw(data, count, offset, yOffset, indexToPixel) {
     var value_bounds = data.findValueBounds(count, offset, this.getMinAndMaxFields(), this.getMinAndMaxValues());
-    var valueToPixel = this.getValueToPixelMapper(value_bounds, true);
+    var valueToPixel = this.getValueToPixelMapper(value_bounds, true, yOffset);
     this._pixelToValue = this.getPixelToValueMapper(value_bounds, true);
     var layers = this.getAllLayers();
     this._refresh();
@@ -166,12 +166,12 @@ class TimeValuePanel extends TimePanel {
    * @param {boolean} flip
    * @returns {valueToPixel} function
    */
-  getValueToPixelMapper(value_bounds, flip) {
+  getValueToPixelMapper(value_bounds, flip, yOffset) {
     var val_min = value_bounds.min;
     var val_max = value_bounds.max;
     var val_range = val_max - val_min;
     var px_height = this.getDrawingHeight();
-    var px_padding_offset = this.paddingTop;
+    var px_padding_offset = yOffset;//this.paddingTop;
     var mapFunc;
     if(flip === true)
     {
